@@ -18,6 +18,6 @@ from django.urls import path, include
 from blogapp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('<int:page_number>', views.home, name="home"),
+    path('', views.homed, name="home"),
     path('blog/', include("blogapp.urls")),
 ]

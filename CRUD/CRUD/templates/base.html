@@ -37,6 +37,14 @@
             <a class="nav-link" href="{% url 'new' %}">새 글 작성하기</a>
         </li>
         </ul>
+        <ul class="navbar-nav mr-right">
+        <li class="nav-item active">
+            <a class="nav-link" href="{% url 'home' 1 %}">로그인 <span class="sr-only"></span></a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="{% url 'new' %}">로그아웃</a>
+        </li>
+        </ul>
     </div>
     </nav>
     <div class="container">

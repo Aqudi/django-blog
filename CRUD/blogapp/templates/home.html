@@ -1,28 +1,31 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>블로그 홈</h1>
-<button type="button"><a href="{% url "new" %}">새 글 작성하기</a></button>
-<br><hr>
+<h1 class="inline">블로그 홈</h1>
+<button type="button" class="btn-sm btn btn-outline-primary"><a href="{% url "new" %}">새 글 작성하기</a></button>
+<br><br>
+<div class="col-8">
+<table class="table">
 {% for blog in blogs %}
-    제목   : <a href="{% url 'detail' blog.id %}">{{ blog.title }}</a>
-    <br>
-    글쓴이 : {{ blog.writer }}
-    <br>    
-    <hr>
+    <tr>
+    <th width="30%">제목   : <a href="{% url 'detail' blog.id %}">{{ blog.title }}</a></th>
+    <td>글쓴이 : {{ blog.writer }}</td>  
+    </tr>
 {% endfor %}
+</table>
+</div>
 <nav aria-label="Page navigation example">
   <ul class="pagination">
     <li class="page-item">
-      <a class="page-link" href="#" aria-label="Previous">
+      <a class="page-link" href="{% url 'home' 1 %}" aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
     {% for i in range %}
-    <li class="page-item"><a class="page-link" href="{% url 'home' i %}">{{i}}</a></li>
+    <li class="page-item {% if i == current %}active{% endif %}"><a class="page-link" href="{% url 'home' i %}">{{i}}</a></li>
     {% endfor %}
     <li class="page-item">
-      <a class="page-link" href="#" aria-label="Next">
+      <a class="page-link" href="{% url 'home' page %}" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
       </a>
     </li>

@@ -2,23 +2,24 @@
 {% block content %}
 
 <h1>블로그 홈</h1>
-<a href="{% url 'edit' blog.id %}" >글 수정하기</a>
-<a href="{% url 'delete' blog.id %}" >삭제</a>
-<a href="{% url 'home' 1%}" >돌아가기</a>
-<br>
-<hr>
-<table>
+<a class="btn-sm btn btn-outline-primary" href="{% url 'edit' blog.id %}" >글 수정하기</a>
+<a class="btn-sm btn btn-outline-primary" href="{% url 'delete' blog.id %}" >삭제</a>
+<a class="btn-sm btn btn-outline-primary" href="{% url 'home' 1%}" >돌아가기</a>
+<br><br>
+<div class="col-8">
+<table class="table">
         <tr>
-            <th><h6>제목     :</h6>
+            <th width="30%">제목     :</th>
             <td>{{ blog.title }}</td>
         </tr>
-        <tr>
-            <th><h6>글쓴이  :</h6></h6>
+        <tr>    
+            <th width="30%">글쓴이  :</th>
             <td>{{ blog.writer }}</td>
         </tr>
         <tr>
-            <th><h6>내용    :</h6></h6>
+            <th width="30%">내용    :</th>
             <td>{{ blog.body }}</td>
         </tr>
     </table>
+</div>
 {% endblock %}

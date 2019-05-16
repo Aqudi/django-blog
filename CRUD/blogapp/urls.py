@@ -24,4 +24,5 @@ urlpatterns = [
     path('delete/<int:id>', views.delete, name="delete"),
     path('create/', views.create, name="create"),
     path('update/<int:id>', views.update, name="update"),
+    path('<int:page_number>', views.home, name="home"),
 ]

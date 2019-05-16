@@ -4,11 +4,28 @@ from .models import *
 # Create your views here.
 def home(request, page_number=1):
     blogs = Blog.objects.all().order_by('-id')
-    page_n = blogs.count() // 5
-    ranges = list(range(1, page_n+2))
+
+    page_n = blogs.count() // 5 + 1
+    if blogs.count() % 5:
+        page_n = blogs.count() // 5 + 2
+
+    ranges = list(range(1, page_n))
     start = 0 + (page_number-1) * 5
     end = page_number * 5
-    return render(request, 'home.html', {'blogs':blogs[start:end], 'range':ranges})
+    return render(request, 'home.html', {'blogs':blogs[start:end], 'range':ranges, "page":page_n-1, "current":page_number})
+
+def homed(request):
+    blogs = Blog.objects.all().order_by('-id')
+    page_number = 1
+    page_n = blogs.count() // 5 + 1
+    if blogs.count() % 5:
+        page_n = blogs.count() // 5 + 2
+
+    ranges = list(range(1, page_n))
+    start = 0 + (page_number-1) * 5
+    end = page_number * 5
+    return render(request, 'home.html', {'blogs':blogs[start:end], 'range':ranges, "page":page_n-1, "current":page_number})
+
 
 def new(request):
     return render(request, 'new.html')
