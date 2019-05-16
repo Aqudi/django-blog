@@ -4,14 +4,21 @@
 <h1>블로그 홈</h1>
 <a href="{% url 'edit' blog.id %}" >글 수정하기</a>
 <a href="{% url 'delete' blog.id %}" >삭제</a>
-<a href="{% url 'home' %}" >돌아가기</a>
+<a href="{% url 'home' 1%}" >돌아가기</a>
 <br>
 <hr>
-제목   : {{ blog.title }}
-<br>
-글쓴이 : {{ blog.writer }}
-<br>    
-내용   : {{ blog.body }}
-<hr>
-
+<table>
+        <tr>
+            <th><h6>제목     :</h6>
+            <td>{{ blog.title }}</td>
+        </tr>
+        <tr>
+            <th><h6>글쓴이  :</h6></h6>
+            <td>{{ blog.writer }}</td>
+        </tr>
+        <tr>
+            <th><h6>내용    :</h6></h6>
+            <td>{{ blog.body }}</td>
+        </tr>
+    </table>
 {% endblock %}

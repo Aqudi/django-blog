@@ -2,12 +2,26 @@
 {% block content %}
 
 <h1>글 수정하기</h1>
+<br>
+<hr>
 <form action="{% url 'update' blog.id %}" method="POST">
     {% csrf_token %}
-    <h4>제목   : </h4><input type="text" name="title" value="{{ blog.title }}">
-    <h4>글쓴이 : </h4><input type="text" name="writer" value="{{ blog.writer }}">
-    <h4>내용   :</h4><textarea name="body">{{ blog.body }}</textarea>
-    <button type="submit">작성하기</button>
-    <button type="button"><a href="{% url 'home' %}">취소</a></button>
+    <table>
+        <tr>
+            <th><h5>제  목    :</th>
+            <td></h5><input type="text" name="title" value="{{ blog.title }}"></td>
+        </tr>
+        <tr>
+            <th><h5>글쓴이 :</h5></th>
+            <td><input type="text" name="writer" value="{{ blog.writer }}"></td>
+        </tr>
+        <tr>
+            <th><h5>내  용    :</h5></th>
+            <td><textarea name="body" style="resize:none; width:100%">{{ blog.body }}</textarea></td>
+        </tr>
+    </table>
+    <button type="submit">제출하기</button>
+    <button type="button"><a href="{% url 'home' 1%}">취소</a></button>
 </form>
+<hr>
 {% endblock %}

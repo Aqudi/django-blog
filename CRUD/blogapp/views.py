@@ -20,7 +20,7 @@ def create(request):
         blog.writer = request.POST.get('writer')
         blog.body = request.POST.get('body')
         blog.save()
-        return redirect('home')
+        return redirect('home', 1)
 
 def detail(request, id):
     blog = get_object_or_404(Blog, pk=id)
@@ -37,9 +37,9 @@ def update(request, id):
         blog.writer = request.POST.get('writer')
         blog.body = request.POST.get('body')
         blog.save()
-        return redirect('home')
+        return redirect('home', 1)
 
 def delete(request, id):
     blog = Blog.objects.get(id=id)
     blog.delete()
-    return redirect('home')
+    return redirect('home', 1)
