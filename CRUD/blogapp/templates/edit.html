@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>글 수정하기</h1>
+<form action="{% url 'update' blog.id %}" method="POST">
+    {% csrf_token %}
+    <h4>제목   : </h4><input type="text" name="title" value="{{ blog.title }}">
+    <h4>글쓴이 : </h4><input type="text" name="writer" value="{{ blog.writer }}">
+    <h4>내용   :</h4><textarea name="body">{{ blog.body }}</textarea>
+    <button type="submit">작성하기</button>
+    <button type="button"><a href="{% url 'home' %}">취소</a></button>
+</form>
+{% endblock %}

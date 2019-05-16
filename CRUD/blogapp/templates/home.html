@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>블로그 홈</h1>
+<button type="button"><a href="{% url "new" %}">새 글 작성하기</a></button>
+<br><hr>
+{% for blog in blogs %}
+    제목   : <a href="{% url 'detail' blog.id %}">{{ blog.title }}</a>
+    <br>
+    글쓴이 : {{ blog.writer }}
+    <br>    
+    {% comment %} <h4>내용   : </h4>{{ blog.body }} {% endcomment %}
+    {% comment %} {{ blog.body }} {% endcomment %}
+    <hr>
+{% endfor %}
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    {% for i in range %}
+    <li class="page-item"><a class="page-link" href="{% url 'home' i %}">{{i}}</a></li>
+    {% endfor %}
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+{% endblock %}
