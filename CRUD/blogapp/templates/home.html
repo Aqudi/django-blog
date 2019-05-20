@@ -2,7 +2,9 @@
 
 {% block content %}
 <h1 class="inline">블로그 홈</h1>
+{% if user.is_authenticated %}
 <button type="button" class="btn-sm btn btn-outline-primary"><a href="{% url "new" %}">새 글 작성하기</a></button>
+{% endif %}
 <br><br>
 <div class="col-8">
 <table class="table">

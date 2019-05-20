@@ -33,9 +33,11 @@
         <li class="nav-item active">
             <a class="nav-link" href="{% url 'home'%}">Home <span class="sr-only">(current)</span></a>
         </li>
+        {% if user.is_authenticated %}
         <li class="nav-item">
             <a class="nav-link" href="{% url 'new' %}">새 글 작성하기</a>
         </li>
+        {% endif %}
         </ul>
         <ul class="navbar-nav mr-right">
         {% if not user.is_authenticated %}
@@ -46,9 +48,12 @@
             <a class="nav-link" href="{% url 'signup' %}">회원가입</a>
         </li>
         {% else %}
-        <li class="nav-item active">
-            <a class="nav-link" href="{% url 'logout' %}">로그아웃</a>
-        </li>
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <li class="nav-item active">
+                <button type="submit" style="all:unset">로그아웃</button>
+            </li>
+        </form>
         {% endif %}
         </ul>
     </div>
