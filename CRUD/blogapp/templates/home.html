@@ -1,38 +1,53 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1 class="inline">블로그 홈</h1>
-{% if user.is_authenticated %}
-<button type="button" class="btn-sm btn btn-outline-primary"><a href="{% url "new" %}">새 글 작성하기</a></button>
-{% endif %}
-<br><br>
-<div class="col-8">
-<table class="table">
-{% for blog in blogs %}
-    <tr>
-    <th width="30%">제목   : <a href="{% url 'detail' blog.id %}">{{ blog.title }}</a></th>
-    <td>글쓴이 : {{ blog.writer }}</td>  
-    </tr>
-{% endfor %}
-</table>
+
+<div class="card account-form-large">
+  <div class="card-body">
+    <div>
+      <h1 class="textcenter">블로그 홈</h1>
+      {% if user.is_authenticated %}
+      <button type="button" class="btn-sm btn btn-outline-primary"style="margin-bottom:1rem;"><a href="{% url 'new' %}">새 글
+          작성하기</a></button>
+      {% endif %}
+    </div>
+    <table class="table">
+      <thead>
+        <th width="10%" class="textcenter">글번호</th>
+        <th width="40%">제목</th>
+        <th width="30%" class="textcenter textright">글쓴이</th>
+      </thead>
+      <tbody>
+        {% for blog in blogs %}
+        <tr>
+          <td width="8%" class="textcenter">{{blog.id}}</td>
+          <td width="64%"><a href="{% url 'detail' blog.id %}">{{ blog.title }}</a></td>
+          <td width="40%" class="textcenter textright">{{ blog.writer }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <nav class="margin-side">
+    <ul class="pagination">
+      <li class="page-item">
+        <a class="page-link" href="?page=1" aria-label="first">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      {% for i in blogs.paginator.page_range %}
+      <li class="page-item {% if i == blogs.number %}active{% endif %}"><a class="page-link"
+          href="?page={{i}}">{{i}}</a>
+      </li>
+      {% endfor %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{blogs.paginator.num_pages}}" aria-label="last">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
 </div>
-
-<nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <li class="page-item">
-      <a class="page-link" href="?page=1" aria-label="first">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-    {% for i in blogs.paginator.page_range %}
-    <li class="page-item {% if i == blogs.number %}active{% endif %}"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
-    {% endfor %}
-    <li class="page-item">
-      <a class="page-link" href="?page={{blogs.paginator.num_pages}}" aria-label="last">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
-</nav>
-
+</div>
 {% endblock %}

@@ -4,7 +4,7 @@ from django.utils import timezone
 from django.core.paginator import Paginator
 # Create your views here.
 def home(request):
-    blogs = Blog.objects.all()
+    blogs = Blog.objects.all().order_by('-id')
     paginator = Paginator(blogs, 5)
     page = request.GET.get('page', 1)
     blog_page = paginator.get_page(page)
@@ -17,10 +17,10 @@ def create(request):
     if request.method == "POST":
         blog = Blog()
         blog.title = request.POST.get('title')
-        blog.writer = request.POST.get('writer')
+        blog.writer = request.user.username
         blog.body = request.POST.get('body')
         blog.save()
-        return redirect('home', 1)
+        return redirect('home')
 
 def detail(request, id):
     blog = get_object_or_404(Blog, pk=id)
@@ -34,12 +34,12 @@ def update(request, id):
     blog = get_object_or_404(Blog, pk=id)
     if request.method == "POST":
         blog.title = request.POST.get('title')
-        blog.writer = request.POST.get('writer')
+        blog.writer = request.user.username
         blog.body = request.POST.get('body')
         blog.save()
-        return redirect('home', 1)
+        return redirect('home')
 
 def delete(request, id):
     blog = Blog.objects.get(id=id)
     blog.delete()
-    return redirect('home', 1)
+    return redirect('home')

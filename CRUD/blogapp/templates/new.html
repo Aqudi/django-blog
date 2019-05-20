@@ -1,27 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>새 글 작성하기</h1>
-<br>
-<div class="col-8">
-<form action="{% url 'create'%}" method="POST">
-    {% csrf_token %}
-    <table class="table">
-        <tr>
-            <th>제  목    :</th>
-            <td><input type="text" name="title"></td>
-        </tr>
-        <tr>
-            <th>글쓴이 :</th>
-            <td><input type="text" name="writer"></td>
-        </tr>
-        <tr>
-            <th>내  용    :</th>
-            <td><textarea name="body" style="resize:none; width:100%"></textarea></td>
-        </tr>
-    </table>
-    <button type="submit" class="btn-sm btn btn-outline-primary">제출하기</button>
-    <button type="button" class="btn-sm btn btn-outline-primary"><a href="{% url 'home'%}">취소</a></button>
-</form>
+<div class="card account-form-large">
+    <div class="card-body">
+        <h1>새 글 작성하기</h1>
+        <form action="{% url 'create'%}" method="POST">
+            {% csrf_token %}
+            <table class="table">
+                <tr>
+                    <th>제 목 :</th>
+                    <td><input type="text" name="title"></td>
+                </tr>
+                <!-- <tr>
+                    <th>글쓴이 :</th>
+                    <td><input type="text" name="writer"></td>
+                </tr> -->
+                <tr>
+                    <th>내 용 :</th>
+                    <td><textarea name="body" style="resize:none; width:100%"></textarea></td>
+                </tr>
+            </table>
+            <button type="submit" class="btn-sm btn btn-outline-primary">제출하기</button>
+            <button type="button" class="btn-sm btn btn-outline-primary"><a href="{% url 'home'%}">취소</a></button>
+        </form>
+    </div>
 </div>
 {% endblock %}

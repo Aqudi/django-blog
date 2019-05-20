@@ -23,46 +23,69 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">블로그</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+        <a class="navbar-brand" href="#">블로그</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-            <a class="nav-link" href="{% url 'home'%}">Home <span class="sr-only">(current)</span></a>
-        </li>
-        {% if user.is_authenticated %}
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'new' %}">새 글 작성하기</a>
-        </li>
-        {% endif %}
-        </ul>
-        <ul class="navbar-nav mr-right">
-        {% if not user.is_authenticated %}
-        <li class="nav-item active">
-            <a class="nav-link" href="{% url 'login' %}">로그인 <span class="sr-only"></span></a>
-        </li>
-        <li class="nav-item active">
-            <a class="nav-link" href="{% url 'signup' %}">회원가입</a>
-        </li>
-        {% else %}
-        <form method="POST" action="{% url 'logout' %}">
-            {% csrf_token %}
-            <li class="nav-item active">
-                <button type="submit" style="all:unset">로그아웃</button>
-            </li>
-        </form>
-        {% endif %}
-        </ul>
-    </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'home'%}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'new' %}">새 글 작성하기</a>
+                </li>
+                {% endif %}
+            </ul>
+            <ul class="navbar-nav mr-right">
+                {% if not user.is_authenticated %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'login' %}">로그인 <span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'signup' %}">회원가입</a>
+                </li>
+                {% else %}
+                <form method="POST" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <li class="nav-item active">
+                        <button type="submit" style="all:unset; cursor:pointer;">로그아웃</button>
+                    </li>
+                </form>
+                {% endif %}
+            </ul>
+        </div>
     </nav>
     <div class="container">
-    <br>
+        <br>
         {% block content %}
         {% endblock %}
     </div>
 </body>
+<style>
+    .account-form {
+        width: 25rem;
+        margin: 0 auto;
+    }
+    .account-form-large {
+        width: 50rem;
+        margin: 0 auto;
+    }
+    .margin-side{
+        margin: 0 auto;
+    }
+    .textcenter {
+        text-align: center;
+    }
+    .inline{
+        display: inline;
+    }
+    .textright{
+        text-align: right;
+    }
+</style>
 
 </html>
