@@ -49,11 +49,15 @@
                     <a class="nav-link" href="{% url 'signup' %}">회원가입</a>
                 </li>
                 {% else %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">{{ request.user.username }}</a>
+                </li>
+                <li class="nav-item active">
+                    <label for="logout" class="nav-link" style="cursor:pointer;">로그아웃</label>
+                </li>
                 <form method="POST" action="{% url 'logout' %}">
                     {% csrf_token %}
-                    <li class="nav-item active">
-                        <button type="submit" style="all:unset; cursor:pointer;">로그아웃</button>
-                    </li>
+                    <button for="logout" type="submit" id="logout" style="all:unset; visibility: hidden; width:0; height:0;"></button>
                 </form>
                 {% endif %}
             </ul>
